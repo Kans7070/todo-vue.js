@@ -12,9 +12,9 @@
             >+</b-button
           >
         </div>
-        <b-list-group v-if="todos.length">
+        <b-list-group v-if="filteredTodo.length">
           <b-list-group-item
-            v-for="(todo, index) in todos"
+            v-for="(todo, index) in filteredTodo"
             :key="index"
             class="d-flex flex-row gap-2"
           >
@@ -66,6 +66,9 @@ export default {
     todos: {
       type: Array,
     },
+    search: {
+      type: String,
+    },
   },
 
   methods: {
@@ -87,6 +90,16 @@ export default {
           return { todo, isDone };
         })
       );
+    },
+  },
+
+  computed: {
+    filteredTodo() {
+      if (!this.search) {
+        return this.todos;
+      }
+
+      return this.todos.filter((d) => d.todo.match(this.search));
     },
   },
 };

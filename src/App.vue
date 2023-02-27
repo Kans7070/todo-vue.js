@@ -4,7 +4,7 @@
       <NavBar />
     </div>
     <b-container class="py-5">
-      <TodoComponent :todos="todos" />
+      <TodoComponent :todos="todos" :search="search"/>
     </b-container>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
   data: function () {
     return {
       todos: [],
+      search: "",
     };
   },
 
@@ -34,7 +35,7 @@ export default {
   updated() {
     eventBus.$on("editTodo", ({ index, data }) => this.editTodo(index, data));
     eventBus.$on("deleteTodo", (index) => this.deleteTodo(index));
-    // this.logUpdate();
+    eventBus.$on("search", (data) => (this.search = data));
   },
 
   methods: {
