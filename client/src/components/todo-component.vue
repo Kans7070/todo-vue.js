@@ -87,7 +87,9 @@ export default {
         return this.todos;
       }
 
-      return this.todos.filter((d) => d.complete.match(this.search));
+      return this.todos.filter((d) =>
+        d.content.toLowerCase().match(this.search.toLowerCase())
+      );
     },
   },
 };
