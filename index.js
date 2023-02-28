@@ -14,7 +14,7 @@ mongoose
     const app = express();
 
     app.use(express.json());
-    app.get("/", (req, res) => res.json({ "message": "server is running" }));
+    app.get("/", (req, res) => res.json({ message: "server is running" }));
     app.use("/todo", todoRoutes);
 
     app.listen(PORT, () => console.log(`server is running port at ${PORT}`));
