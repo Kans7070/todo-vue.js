@@ -19,19 +19,19 @@
             class="d-flex flex-row gap-2"
           >
             <b-form-checkbox
-              v-model="todo.isDone"
+              v-model="todo.complete"
               class="d-flex align-items-center"
             ></b-form-checkbox>
             <b-form-input
-              v-model.lazy="todo.todo"
+              v-model.lazy="todo.content"
               placeholder="todo"
               class="add-box"
-              v-if="!todo.isDone"
+              v-if="!todo.complete"
             >
             </b-form-input>
             <p v-else class="add-box d-flex align-items-center column-p">
               <del>
-                {{ todo.todo }}
+                {{ todo.content }}
               </del>
             </p>
 
@@ -39,13 +39,12 @@
               size="sm"
               class="my-2 my-sm-0"
               type="submit"
-              @click="deleteTodo(index)"
+              @click="deleteTodo(todo._id)"
               ><b-icon icon="trash"></b-icon
             ></b-button>
           </b-list-group-item>
         </b-list-group>
         <div v-else>Add todo</div>
-        <button @click="logData()">console.log</button>
       </div>
     </b-container>
   </div>
@@ -73,22 +72,12 @@ export default {
 
   methods: {
     createTodo() {
-      eventBus.$emit("addTodos", { todo: this.text, isDone: false });
+      eventBus.$emit("addTodos", { content: this.text, complete: false });
       this.text = "";
     },
 
     deleteTodo(index) {
       eventBus.$emit("deleteTodo", index);
-    },
-
-    logData() {
-      console.log(
-        this.todos.map((element) => {
-          const todo = element.todo;
-          const isDone = element.isDone;
-          return { todo, isDone };
-        })
-      );
     },
   },
 
@@ -98,7 +87,7 @@ export default {
         return this.todos;
       }
 
-      return this.todos.filter((d) => d.todo.match(this.search));
+      return this.todos.filter((d) => d.complete.match(this.search));
     },
   },
 };

@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 // const dotenv = require("dotenv"); this is not the right way. should be in package.json
 const todoRoutes = require("./routes/todo");
 
@@ -14,6 +15,7 @@ mongoose
     const app = express();
 
     app.use(express.json());
+    app.use(cors());
     app.get("/", (req, res) => res.json({ message: "server is running" }));
     app.use("/todo", todoRoutes);
 
