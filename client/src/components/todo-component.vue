@@ -78,7 +78,6 @@ export default {
     },
 
     deleteTodo(index) {
-      console.log(index);
       eventBus.$emit("deleteTodo", index);
     },
 
@@ -108,7 +107,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .add-box {
-  width: 400px;
+  max-width: 400px;
   margin: 0px;
   height: 38px;
 }

@@ -4,7 +4,7 @@
       <NavBar />
     </div>
     <b-container class="py-5">
-      <TodoComponent :todos="todos" :search="search"/>
+      <TodoComponent :todos="todos" :search="search" />
     </b-container>
   </div>
 </template>
@@ -30,13 +30,12 @@ export default {
 
   created() {
     eventBus.$on("addTodos", (data) => this.addTodos(data));
-  },
-
-  updated() {
     eventBus.$on("editTodo", ({ index, data }) => this.editTodo(index, data));
     eventBus.$on("deleteTodo", (index) => this.deleteTodo(index));
     eventBus.$on("search", (data) => (this.search = data));
   },
+
+  updated() {},
 
   methods: {
     addTodos(data) {
@@ -51,6 +50,7 @@ export default {
     },
 
     deleteTodo(index) {
+      console.log(index);
       this.todos.splice(index, 1);
     },
 
